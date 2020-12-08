@@ -8,3 +8,4 @@ require (
 	github.com/prometheus/client_model v0.2.0
 	github.com/sirupsen/logrus v1.7.0
 )
+

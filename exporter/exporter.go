@@ -127,10 +127,14 @@ func (e *Exporter) scrapeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// get rid of username/password info in "target" so users don't send them in plain text via http
-	u.User = nil
 	target = u.String()
 
 	opts := e.options
+
+	if u.User != nil{
+		opts.User = u.User.Username()
+		opts.Password, _ = u.User.Password()
+	}
 
 	if ck := r.URL.Query().Get("check-keys"); ck != "" {
 		opts.CheckKeys = ck
